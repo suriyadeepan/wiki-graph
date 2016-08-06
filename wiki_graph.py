@@ -33,18 +33,5 @@ def build_graph(dataset,node_count):
 
 if __name__ == '__main__':
     dataset, node_count = proc_data(get_data())
-'''
-def build_graph():
-
-g = Graph()
-g.add_vertex(4)
-label = g.new_edge_property("string")
-e = g.add_edge(0, 1)
-label[e] = "A"
-e = g.add_edge(2, 3)
-label[e] = "foo"
-e = g.add_edge(3, 1)
-label[e] = "bar"
-e = g.add_edge(0, 3)
-label[e] = "gnat"
-'''
+    g, label = build_graph(dataset,node_count)
+    graph_draw(g, edge_text=label, edge_font_size=13, edge_text_distance=30, edge_marker_size=10,output_size=(7500, 7500), output="graph-op.png")
