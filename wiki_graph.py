@@ -11,15 +11,28 @@ def proc_data(dataset):
     urls.extend( list(set([ data['ext_url'] for data in dataset ])) )
     url_to_idx = { url:i for i, url in enumerate(urls) }
     # build dataset, replacing urls with ids
-    url_title = [ (data['self_url'],data['title']) for data in dataset ]
-    url_to_title = { url:title for url,title in list(set(url_title)) }
-    return urls, url_to_idx, url_to_title
+    mod_dataset = []
+    for data in dataset:
+        mod_dataset.append((url_to_idx[data['self_url']],url_to_idx[data['ext_url']],data['title'],data['ext_title']))
+    # return modified dataset
+    return mod_dataset, len(urls)
+
+def build_graph(dataset,node_count):
+    g = Graph()
+    g.add_vertex(node_count)
+    # label -> title
+    label = g.new_edge_property('string')
+    for n1,n2,t1,t2 in dataset:
+        # connect nodes
+        e = g.add_edge(n1,n2)
+        # name edge
+        label[e] = t2
+    # return the graph
+    return g, label
 
 
 if __name__ == '__main__':
-    dataset = get_data()
-    urls, url_to_idx, url_to_title = proc_data(dataset)
-    print(len(urls),url_to_idx['https://en.wikipedia.org/wiki/Rio_de_Janeiro'],url_to_title['https://en.wikipedia.org/wiki/Rio_de_Janeiro'])
+    dataset, node_count = proc_data(get_data())
 '''
 def build_graph():
 

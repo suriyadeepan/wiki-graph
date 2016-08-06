@@ -90,3 +90,6 @@ ENV/
 
 # generated json files
 *.json
+
+# swp files
+.*swp
