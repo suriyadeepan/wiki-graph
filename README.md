@@ -30,3 +30,9 @@ scrapy runspider wiki-spider.py -o wiki.json
 python3 wiki-graph.py
 ```
 * Adjust the parameters of **graph_draw( )** function to suit you
+
+## JSON format
+
+```json
+{"ext_url": "https://en.wikipedia.org/wiki/Tumor_suppressor_gene", "self_url": "https://en.wikipedia.org/wiki/Transcription_factor", "ext_title": "Tumor suppressor gene", "title": "Transcription factor"}
+```
